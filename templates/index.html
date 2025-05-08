@@ -54,11 +54,13 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: opacity 1s ease;
-            opacity: 0;
+            opacity: 0;  /* Изначально скрыто */
+            visibility: hidden;  /* Делаем невидимым */
         }
 
         .show {
-            opacity: 1;
+            opacity: 1;  /* Сделать видимым */
+            visibility: visible;  /* Сделать видимым */
         }
     </style>
 </head>
@@ -68,13 +70,14 @@
 
         <button onclick="getRandomPhrase()">Выбрать</button>
 
-        <p id="phrase" class="fade"></p>
+        <p id="phrase" class="fade"></p> <!-- Это место для фразы -->
     </div>
 
     <script>
         // Базовая проверка JavaScript
         console.log("JavaScript работает!");
 
+        // Функция для отправки запроса и получения случайной фразы
         function getRandomPhrase() {
             console.log("Кнопка нажата! Отправляем запрос...");
             
@@ -85,16 +88,16 @@
                     if (!response.ok) {
                         throw new Error('Ошибка на сервере');
                     }
-                    return response.text();
+                    return response.text();  // Возвращаем текст
                 })
                 .then(phrase => {
                     console.log("Фраза получена:", phrase);
                     const phraseElement = document.getElementById('phrase');
-                    phraseElement.innerText = phrase;
-                    phraseElement.classList.add('show');
+                    phraseElement.innerText = phrase;  // Вставляем фразу в элемент
+                    phraseElement.classList.add('show');  // Добавляем класс для видимости
                 })
                 .catch(error => {
-                    console.error('Ошибка:', error);
+                    console.error('Ошибка:', error);  // Логирование ошибки, если есть
                 });
         }
     </script>
