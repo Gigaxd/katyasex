@@ -72,21 +72,26 @@
     </div>
 
     <script>
-        // Функция для получения случайной фразы
+        // Базовая проверка JavaScript
+        console.log("JavaScript работает!");
+
         function getRandomPhrase() {
-            // Отправляем запрос на сервер
+            console.log("Кнопка нажата! Отправляем запрос...");
+            
+            // Отправка запроса на сервер
             fetch('/random')
                 .then(response => {
+                    console.log("Ответ от сервера получен!");
                     if (!response.ok) {
-                        throw new Error('Сервер вернул ошибку');
+                        throw new Error('Ошибка на сервере');
                     }
                     return response.text();
                 })
                 .then(phrase => {
-                    // Получаем элемент, в который нужно вставить фразу
+                    console.log("Фраза получена:", phrase);
                     const phraseElement = document.getElementById('phrase');
                     phraseElement.innerText = phrase;
-                    phraseElement.classList.add('show');  // Анимация появления фразы
+                    phraseElement.classList.add('show');
                 })
                 .catch(error => {
                     console.error('Ошибка:', error);
