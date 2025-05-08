@@ -94,7 +94,12 @@
                     console.log("Фраза получена:", phrase);
                     const phraseElement = document.getElementById('phrase');
                     phraseElement.innerText = phrase;  // Вставляем фразу в элемент
-                    phraseElement.classList.add('show');  // Добавляем класс для видимости
+                    
+                    // Для отладки, выводим в консоль
+                    console.log("Фраза обновлена на странице:", phrase);
+
+                    // Добавляем класс для видимости
+                    phraseElement.classList.add('show');
                 })
                 .catch(error => {
                     console.error('Ошибка:', error);  // Логирование ошибки, если есть
