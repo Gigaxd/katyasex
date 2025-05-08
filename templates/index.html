@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Выбор фразы</title>
     <style>
-        /* Основной стиль для страницы */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f5f5f5;
@@ -16,17 +15,14 @@
             margin: 0;
             color: #333;
             text-align: center;
-            transition: background-color 0.5s ease;
         }
 
         h1 {
             font-size: 36px;
             color: #333;
             margin-bottom: 20px;
-            animation: fadeIn 2s ease-out;
         }
 
-        /* Стиль кнопки */
         button {
             font-size: 20px;
             padding: 15px 40px;
@@ -39,7 +35,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Эффект при наведении на кнопку */
         button:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
@@ -50,7 +45,6 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Эффект появления фразы */
         #phrase {
             font-size: 24px;
             font-weight: bold;
@@ -63,21 +57,8 @@
             opacity: 0;
         }
 
-        /* Анимация появления */
         .show {
             opacity: 1;
-        }
-
-        /* Анимация для заголовка */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
     </style>
 </head>
@@ -91,13 +72,24 @@
     </div>
 
     <script>
+        // Функция для получения случайной фразы
         function getRandomPhrase() {
+            // Отправляем запрос на сервер
             fetch('/random')
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Сервер вернул ошибку');
+                    }
+                    return response.text();
+                })
                 .then(phrase => {
+                    // Получаем элемент, в который нужно вставить фразу
                     const phraseElement = document.getElementById('phrase');
                     phraseElement.innerText = phrase;
                     phraseElement.classList.add('show');  // Анимация появления фразы
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
                 });
         }
     </script>
